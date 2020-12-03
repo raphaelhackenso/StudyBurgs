@@ -14,16 +14,15 @@ from . import models
     methods and return something human readable there. 
 '''
 
-class TestAdmin(admin.ModelAdmin):
-    list_display = ('name','last_name')
-
-
-
 
 
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'middle_name', 'last_name', 'title', 'date_of_birth',
-                    'date_of_death', 'birthplace', 'description', 'gender', 'father', 'mother')
+    list_display = ('first_name', 'ordinal_number', 'name_suffix', 'date_of_birth',
+                    'date_of_death', 'birthplace', 'description', 'gender', 'habsburg_ancestor')
+
+    search_fields = ('first_name',)
+
+
 
 
 class MarriageAdmin(admin.ModelAdmin):
@@ -46,9 +45,6 @@ class NotesAdmin(admin.ModelAdmin):
     list_display = ('content', 'creation_date_time', 'note_for_user', 'note_for_person')
 
 
-
-
-admin.site.register(models.Test, TestAdmin)
 admin.site.register(models.Person, PersonAdmin)
 admin.site.register(models.Marriage, MarriageAdmin)
 admin.site.register(models.Learned, LearnedAdmin)

@@ -15,7 +15,7 @@ router.register(r'marriages', views.MarriageViewSet)
 router.register(r'learneds', views.LearnedViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'notes', views.NotesViewSet)
-router.register(r'tests',views.TestViewSet)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

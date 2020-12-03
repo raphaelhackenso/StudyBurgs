@@ -4,22 +4,28 @@ from . import serializers
 from . import models
 
 
-class TestViewSet(viewsets.ModelViewSet):
-    queryset = models.Test.objects.all()
-
-    serializer_class = serializers.TestSerializer
-
-
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = models.Person.objects.all()
 
     serializer_class = serializers.PersonSerializer
+
+    def list(self, request):
+        first_name = request.GET.get("first_name")
+        queryset = self.filter_queryset(self.get_queryset())
+        if first_name is None:
+            serializer = self.serializer_class(queryset, many=True)
+        else:
+            serializer = self.serializer_class(queryset.filter(name=first_name), many=True)
+        return Response(serializer.data)
+
+
 
 
 class MarriageViewSet(viewsets.ModelViewSet):
     queryset = models.Marriage.objects.all()
 
     serializer_class = serializers.MarriageSerializer
+
 
 class LearnedViewSet(viewsets.ModelViewSet):
     queryset = models.Learned.objects.all()
@@ -39,7 +45,7 @@ class NotesViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.NotesSerializer
 
 
-#BIG TODO -> for now we just give back everything without serarching
+# BIG TODO -> for now we just give back everything without serarching
 
 '''
 

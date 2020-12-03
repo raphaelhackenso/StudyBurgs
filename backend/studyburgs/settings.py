@@ -137,3 +137,6 @@ JWT_AUTH = {
 'JWT_AUTH_HEADER_PREFIX': 'Bearer',
 'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3)
 }
+
+AUTH_USER_MODEL = 'studyburgs.StudyburgsUser'
+

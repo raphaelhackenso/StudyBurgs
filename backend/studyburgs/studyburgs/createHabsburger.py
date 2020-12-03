@@ -17,9 +17,9 @@ class HabsburgerCreation(TestCase):
         # TODO: Create the two model instances using Django's ORM layer:
         # Test: two persons should be in the database
 
-        f = open('habsburger.json', "r")
-        data = json.load(f)
+        with open('habsburger.json', encoding='utf-8') as data_file:
+            json_data = json.loads(data_file.read())
 
-        models.Person.objects.create(data)
-
-
+        for person_data in json_data:
+            movie = models.Person.create(**person_data)
+            # movie and genres created

@@ -41,13 +41,13 @@ class MarriageSerializer(serializers.ModelSerializer):
 class LearnedSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Learned
-        fields = ['pk', 'state', 'learned_person']
+        fields = ['pk', 'state', 'learned_person', 'learned_for_user']
 
 
-class UserSerializer(serializers.ModelSerializer):
+class StudyburgsUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.User
-        fields = ['pk', 'email', 'password', 'role', 'progress', 'learned']
+        model = models.StudyburgsUser
+        fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined']
 
 
 class NotesSerializer(serializers.ModelSerializer):

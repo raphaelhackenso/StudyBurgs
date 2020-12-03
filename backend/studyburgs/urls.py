@@ -13,7 +13,7 @@ router = routers.DefaultRouter()
 router.register(r'persons', views.PersonViewSet)
 router.register(r'marriages', views.MarriageViewSet)
 router.register(r'learneds', views.LearnedViewSet)
-router.register(r'users', views.UserViewSet)
+router.register(r'StudyBurgUsers', views.StudyBurgsUserViewSet)
 router.register(r'notes', views.NotesViewSet)
 
 

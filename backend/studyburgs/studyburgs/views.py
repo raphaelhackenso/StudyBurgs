@@ -20,7 +20,6 @@ class PersonViewSet(viewsets.ModelViewSet):
 
 
 
-
 class MarriageViewSet(viewsets.ModelViewSet):
     queryset = models.Marriage.objects.all()
 
@@ -33,10 +32,10 @@ class LearnedViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.LearnedSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = models.User.objects.all()
+class StudyBurgsUserViewSet(viewsets.ModelViewSet):
+    queryset = models.StudyburgsUser.objects.all()
 
-    serializer_class = serializers.UserSerializer
+    serializer_class = serializers.StudyburgsUserSerializer
 
 
 class NotesViewSet(viewsets.ModelViewSet):

@@ -3,7 +3,7 @@ from . import models
 import re
 
 
-## TODO documentaion
+# PersonSerializer
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Person
@@ -25,12 +25,15 @@ class PersonSerializer(serializers.ModelSerializer):
         return value
 
 
+
+# MarriageSerializer
 class MarriageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Marriage
         fields = ['pk', 'wife', 'husband', 'date_of_marriage', 'comments']
 
     def validate(self, data):
+        # Validate that the person does not marry itself
         wife = data['wife']
         husband = data['husband']
         if wife.pk == husband.pk:
@@ -38,18 +41,21 @@ class MarriageSerializer(serializers.ModelSerializer):
         return data
 
 
+# LearnedSerializer
 class LearnedSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Learned
         fields = ['pk', 'state', 'learned_person', 'learned_for_user']
 
 
+# StudyburgsUserSerializer
 class StudyburgsUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StudyburgsUser
         fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined']
 
 
+# NotesSerializer
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Notes

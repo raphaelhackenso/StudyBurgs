@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <button mat-button [matMenuTriggerFor]="familyMenu">Family</button>
+  <mat-menu #familyMenu="matMenu">
+    <button mat-menu-item routerLink="family">List entire family tree</button>
+  </mat-menu>
+  <app-logout></app-logout>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

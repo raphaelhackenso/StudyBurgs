@@ -26,14 +26,13 @@ class PersonAdmin(admin.ModelAdmin):
 class MarriageAdmin(admin.ModelAdmin):
     list_display = ('wife', 'husband', 'date_of_marriage', 'comments')
 
-    #list_filter = ('wife', 'husband')
+    list_filter = ('wife', 'husband')
 
 
 # LearnedAdmin, filterable by person and user
 class LearnedAdmin(admin.ModelAdmin):
     list_display = ('state', 'learned_person', 'learned_for_user')
 
-    #list_filter = ('learned_person', 'learned_for_user')
 
 
 # StudyBurgsUserAdmin
@@ -45,7 +44,6 @@ class StudyBurgsUserAdmin(admin.ModelAdmin):
 class NotesAdmin(admin.ModelAdmin):
     list_display = ('content', 'creation_date_time', 'note_for_user', 'note_for_person')
 
-    #list_filter = ('note_for_user', 'note_for_person')
 
 
 admin.site.register(models.Person, PersonAdmin)

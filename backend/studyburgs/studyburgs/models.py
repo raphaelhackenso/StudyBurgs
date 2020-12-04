@@ -18,6 +18,9 @@ from django.contrib.auth.models import AbstractUser
 * habsburg_ancestor: the ancestor from the Habsburg family
 *
 '''
+
+## TODO -> implementation of Photo Media
+
 class Person(models.Model):
     CHOICES = (
         ('m', 'Male'),
@@ -77,6 +80,7 @@ class Marriage(models.Model):
 '''
 class StudyburgsUser(AbstractUser):
     progress = models.FloatField(default=0.0)
+
 
     # Notes can be accessed by the related name = 'users_note'
     # Learned Person can be accessed by the related name = 'users_learned_person'

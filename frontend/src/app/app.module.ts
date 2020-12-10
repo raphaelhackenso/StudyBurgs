@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FamilyComponent } from './family/family.component';
 import {MatSortModule} from "@angular/material/sort";
+import { NgxOrgChartModule } from 'ngx-org-chart';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {MatSortModule} from "@angular/material/sort";
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    NgxOrgChartModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

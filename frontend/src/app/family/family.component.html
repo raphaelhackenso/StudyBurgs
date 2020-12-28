@@ -36,9 +36,17 @@
     </td>
   </ng-container>
 
+  <!-- habsburg_ancestor Column -->
+  <ng-container matColumnDef="habsburg_ancestor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>habsburg_ancestor</th>
+    <td mat-cell *matCellDef="let element"> {{element.habsburg_ancestor}} </td>
+  </ng-container>
+
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<ngx-org-chart [nodes]="nodes" direction="vertical" (itemClick)="test($event)"></ngx-org-chart>
+<div>
+<ngx-org-chart [nodes]="createFamilyTree(persons)" direction="vertical" (itemClick)="test($event)"></ngx-org-chart>
+</div>

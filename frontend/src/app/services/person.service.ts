@@ -12,7 +12,8 @@ export interface Person {
   birthplace: string;
   description: string;
   gender: 'm' | 'f';
-  //habsburg_ancestor: ### TODO ###;
+  habsburg_ancestor: Person;
+
 }
 
 @Injectable({

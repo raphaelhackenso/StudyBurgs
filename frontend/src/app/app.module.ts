@@ -24,6 +24,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { FamilyComponent } from './family/family.component';
 import {MatSortModule} from "@angular/material/sort";
 import { NgxOrgChartModule } from 'ngx-org-chart';
+import { DetailsComponent } from './details/details.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -32,35 +34,37 @@ import { NgxOrgChartModule } from 'ngx-org-chart';
     LoginComponent,
     LogoutComponent,
     FamilyComponent,
+    DetailsComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    NgxOrgChartModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
-        allowedDomains: ['localhost:4200']
-      }
-    }),
-    MatSortModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
+        NgxOrgChartModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('access_token');
+                },
+                allowedDomains: ['localhost:4200']
+            }
+        }),
+        MatSortModule,
+        MatGridListModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

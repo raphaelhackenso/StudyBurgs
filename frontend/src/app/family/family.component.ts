@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Person, PersonService} from '../services/person.service';
 import {INode} from 'ngx-org-chart/lib/node';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -11,7 +12,7 @@ import {INode} from 'ngx-org-chart/lib/node';
 })
 export class FamilyComponent implements OnInit {
 
-  constructor(private personService: PersonService) {
+  constructor(private personService: PersonService, private router: Router) {
 
   }
 
@@ -86,8 +87,9 @@ export class FamilyComponent implements OnInit {
     return nestedTreeStructure;
   }
 
-  test($event: INode): void {
-    alert(JSON.stringify($event));
+  getPersonNotePk($event: INode): void {
+    // alert(JSON.stringify($event.pk));
+    this.router.navigate(['/details/' + $event.pk]);
   }
 }
 
@@ -98,7 +100,7 @@ groupByAncestor(objectArray, property) {
     if (!acc[key]) {
       acc[key] = [];
     }
-    acc[key].push(obj);
+    acc[key].push(obj)
     return acc;
   }, {});
 }

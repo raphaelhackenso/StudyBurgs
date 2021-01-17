@@ -39,4 +39,23 @@ export class StudyburgsUserService {
   }
 
 
+/*
+  hasPermisson(permission: string):boolean {
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+
+    if (token){
+      const decodetToken = this.jwtHelperService.decodeToken(token);
+      const permissions = decodetToken.permissions;
+      return permission in permissions;
+      //alert(editPerson in permissions);
+    }
+    return false;
+
+  }
+
+
+ */
+
+
+
 }

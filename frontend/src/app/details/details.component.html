@@ -15,7 +15,7 @@
                 Geburtsdatum:
               </td>
               <td>
-                {{habsburg.date_of_birth}}
+                {{habsburg.date_of_birth | date : 'd.M.yyyy'}}
               </td>
             </tr>
             <tr>
@@ -23,7 +23,7 @@
                 Sterbedatum:
               </td>
               <td>
-                {{habsburg.date_of_death}}
+                {{habsburg.date_of_death | date : 'd.M.yyyy'}}
               </td>
             </tr>
           </table>
@@ -36,7 +36,7 @@
       <td>
       </td>
       <td width="350">
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="{{habsburg.picture_url}}" alt="Photo of a Shiba Inu">
       </td>
     </tr>
   </table>

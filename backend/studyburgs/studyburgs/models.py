@@ -35,6 +35,7 @@ class Person(models.Model):
     birthplace = models.TextField(null=True)
     description = models.TextField(null=True)
     gender = models.CharField(max_length=1, choices=CHOICES)
+    picture_url = models.TextField(null=True)
     habsburg_ancestor = models.ForeignKey('self', related_name='habsburg_ancestor_person', on_delete=models.SET_NULL,
                                           null=True)
 

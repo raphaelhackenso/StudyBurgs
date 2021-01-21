@@ -12,6 +12,7 @@ export interface Person {
   birthplace: string;
   description: string;
   gender: 'm' | 'f';
+  picture_url: string;
   habsburg_ancestor: Person;
 
 }

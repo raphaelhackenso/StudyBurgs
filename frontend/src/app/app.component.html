@@ -1,9 +1,14 @@
-<mat-toolbar>
+<mat-toolbar color="primary">
+  <img src="assets/header.png" alt="StudyBurgs" style="height:30px">
   <button mat-button [matMenuTriggerFor]="familyMenu">Family</button>
   <mat-menu #familyMenu="matMenu">
     <button mat-menu-item routerLink="family">List entire family tree</button>
   </mat-menu>
-  <app-logout></app-logout>
+  <span class="spacer"></span>
+  <span class="mat-button">Fortschritt: {{progress}} %</span>
+  <mat-progress-bar style="width:200px" value="{{progress}}"></mat-progress-bar>
+  <app-logout class="mat-button"></app-logout>
 </mat-toolbar>
+
 
 <router-outlet></router-outlet>

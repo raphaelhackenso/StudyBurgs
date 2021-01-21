@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+  progress = 60;
+  //TODO Implement Progress
 }

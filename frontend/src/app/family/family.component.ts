@@ -17,7 +17,7 @@ export class FamilyComponent implements OnInit {
   }
 
   persons: Person[];
-  displayedColumns = ['first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death', 'habsburg_ancestor',];
+  displayedColumns = ['first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death','picture_url', 'habsburg_ancestor',];
 
 
   ngOnInit(): void {
@@ -87,7 +87,7 @@ export class FamilyComponent implements OnInit {
     return nestedTreeStructure;
   }
 
-  getPersonNotePk($event: INode): void {
+  getPersonNotePk($event: any): void {
     // alert(JSON.stringify($event.pk));
     this.router.navigate(['/details/' + $event.pk]);
   }

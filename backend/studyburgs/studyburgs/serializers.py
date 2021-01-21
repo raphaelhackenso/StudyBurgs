@@ -8,7 +8,7 @@ class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Person
         fields = ['pk', 'first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death',
-                  'birthplace', 'description', 'gender', 'habsburg_ancestor']
+                  'birthplace', 'description', 'gender','picture_url', 'habsburg_ancestor']
 
     def validate(self, data):
         # Validate that DoD is after DoB.

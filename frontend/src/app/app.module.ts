@@ -26,6 +26,7 @@ import {MatSortModule} from "@angular/material/sort";
 import { NgxOrgChartModule } from 'ngx-org-chart';
 import { DetailsComponent } from './details/details.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {MatGridListModule} from "@angular/material/grid-list";
         MatNativeDateModule,
         MatCheckboxModule,
         NgxOrgChartModule,
+        MatProgressBarModule,
         JwtModule.forRoot({
             config: {
                 tokenGetter: () => {

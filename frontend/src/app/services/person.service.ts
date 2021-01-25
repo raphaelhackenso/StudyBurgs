@@ -36,4 +36,12 @@ export class PersonService {
   getPerson(pk: number): Observable<Person> {
     return this.http.get<Person>('/api/persons/' + pk + '/');
   }
+
+  updatePerson(person: Person): Observable<any> {
+    return this.http.patch('/api/persons/' + person.pk + '/', person);
+  }
+
+  createPerson(person: Person): Observable<Person> {
+    return this.http.post<Person>('/api/persons/', person);
+  }
 }

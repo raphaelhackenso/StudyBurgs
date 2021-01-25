@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatTableModule} from "@angular/material/table";
@@ -27,6 +27,10 @@ import { NgxOrgChartModule } from 'ngx-org-chart';
 import { DetailsComponent } from './details/details.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { AddHabsburgComponent } from './add-habsburg/add-habsburg.component';
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {HttperrorInterceptor} from "./httperror.interceptor";
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     LogoutComponent,
     FamilyComponent,
     DetailsComponent,
+    AddHabsburgComponent,
+    ProgressComponent,
   ],
     imports: [
         BrowserModule,
@@ -65,9 +71,17 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
             }
         }),
         MatSortModule,
-        MatGridListModule
+        MatGridListModule,
+        MatSnackBarModule,
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttperrorInterceptor,
+      multi: true,
+      deps: [MatSnackBar]
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

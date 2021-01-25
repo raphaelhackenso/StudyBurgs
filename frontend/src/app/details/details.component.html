@@ -4,18 +4,18 @@
       <td>
         <mat-card-header>
           <div mat-card-avatar class="habsburg-icon"></div>
-          <mat-card-title>{{habsburg.first_name}} {{habsburg.ordinal_number}}</mat-card-title>
-          <mat-card-subtitle>{{habsburg.name_suffix}}</mat-card-subtitle>
+          <mat-card-title>{{habsburg?.first_name}} {{habsburg?.ordinal_number}}</mat-card-title>
+          <mat-card-subtitle>{{habsburg?.name_suffix}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>{{habsburg.description}}</p>
+          <p>{{habsburg?.description}}</p>
           <table>
             <tr>
               <td>
                 Geburtsdatum:
               </td>
               <td>
-                {{habsburg.date_of_birth | date : 'd.M.yyyy'}}
+                {{habsburg?.date_of_birth | date : 'd.M.yyyy'}}
               </td>
             </tr>
             <tr>
@@ -23,24 +23,47 @@
                 Sterbedatum:
               </td>
               <td>
-                {{habsburg.date_of_death | date : 'd.M.yyyy'}}
+                {{habsburg?.date_of_death | date : 'd.M.yyyy'}}
               </td>
             </tr>
           </table>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button>EDIT</button>
+          <button mat-button color="primary" [routerLink]="'/add-habsburg/' + habsburg.pk"
+                  *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.change_person')">Edit
+          </button>
           <button mat-button>VIEW NOTES</button>
+          <button mat-button (click)="recalculateProgress()">curr User</button>
+
         </mat-card-actions>
+
+
+        <form [formGroup]="learnedFormGroup" (ngSubmit)="learnHabsburger()">
+          <mat-checkbox formControlName="state">
+            <div *ngIf="learnedFormGroup.controls.pk.value">
+              <span *ngIf="!learnedHabsburg.state">Not yet learned</span>
+              <span *ngIf="learnedHabsburg.state">Learned</span>
+            </div>
+            <div *ngIf="!learnedFormGroup.controls.pk.value">
+              <span>Not yet learned</span>
+            </div>
+
+          </mat-checkbox>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" [disabled]="!learnedFormGroup.valid">
+              <span>Submit</span>
+            </button>
+          </mat-card-actions>
+        </form>
+
       </td>
       <td>
       </td>
       <td width="350">
-        <img mat-card-image src="{{habsburg.picture_url}}" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="{{habsburg?.picture_url}}" alt="Photo of Habsburg">
       </td>
     </tr>
   </table>
 </mat-card>
-
 
 

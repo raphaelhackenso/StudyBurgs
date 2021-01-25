@@ -1,8 +1,22 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {map} from "rxjs/operators";
+import {Person} from "./person.service";
+
+export interface StudyBurgsUser {
+  pk: number;
+  username: string;
+  progress: number;
+  last_name: string;
+  first_name: string;
+  email: string;
+  date_joined: Date;
+
+
+}
 
 @Injectable({
   providedIn: 'root'
@@ -36,26 +50,45 @@ export class StudyburgsUserService {
     localStorage.removeItem(this.accessTokenLocalStorageKey);
     this.isLoggedIn.next(false);
     this.router.navigate(['/login']);
+    window.location.reload()
+
   }
 
-
-/*
-  hasPermisson(permission: string):boolean {
+  hasNeededPermission(permission: string): boolean {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
-
-    if (token){
+    if (token) {
       const decodetToken = this.jwtHelperService.decodeToken(token);
       const permissions = decodetToken.permissions;
       return permission in permissions;
-      //alert(editPerson in permissions);
     }
-    return false;
-
   }
 
 
- */
+  getCurrentUser(): Observable<StudyBurgsUser> {
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    if (token) {
+      const decodetToken = this.jwtHelperService.decodeToken(token);
+      const decodetUserID = decodetToken.user_id;
 
+      return this.http.get<StudyBurgsUser>('/api/StudyBurgUsers/' + decodetUserID + '/').pipe(
+        map((user) => {
+          return user;
+        })
+      )
+    }
+  }
+
+  getCurrentUserID(): number {
+    const token = localStorage.getItem(this.accessTokenLocalStorageKey);
+    if (token) {
+      const decodetToken = this.jwtHelperService.decodeToken(token);
+      return decodetToken.user_id;
+    }
+  }
+
+  updateStudyBurgsUser(studyBurgsUser: StudyBurgsUser): Observable<any> {
+    return this.http.patch('/api/StudyBurgUsers/' + this.getCurrentUserID() + '/', studyBurgsUser);
+  }
 
 
 }

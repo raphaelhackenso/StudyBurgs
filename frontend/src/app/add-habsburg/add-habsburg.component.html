@@ -1,0 +1,59 @@
+<form [formGroup]="habsburgFormGroup" (ngSubmit)="createOrUpdateHabsburg()" class="add-habsburg-form__form">
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="First Name" formControlName="first_name">
+    <mat-hint align="end">The first name of the Habsburger</mat-hint>
+    <mat-error *ngIf="habsburgFormGroup.controls.first_name.hasError('required')">Name is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Ordinal Number" formControlName="ordinal_number">
+    <mat-hint align="end">The ordinal number of the Habsburger</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Name Suffix" formControlName="name_suffix">
+    <mat-hint align="end">The Name Suffix of the Habsburger</mat-hint>
+  </mat-form-field>
+
+  <app-date placeholder="Date of Birth" formControlName="date_of_birth" hint="The Date of Birth of the Habsburger"
+            [required]="true"></app-date>
+
+  <app-date placeholder="Date of Death" formControlName="date_of_death" hint="The Date of Death of the Habsburger"
+            [required]="true"></app-date>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Birthplace" formControlName="birthplace">
+    <mat-hint align="end">The birthplace of the Habsburger</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="description" formControlName="description"></textarea>
+    <mat-hint align="end">The description of the Person</mat-hint>
+    <mat-error *ngIf="habsburgFormGroup.controls.description.hasError('required')">Description is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Gender" formControlName="gender">
+      <mat-option [value]="gender.key"
+                  *ngFor="let gender of genderService.genderNames | keyvalue">{{gender.value}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The gender of the Person</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Ancestor" formControlName="habsburg_ancestor">
+      <mat-option [value]="ancestorOption.pk"
+                  *ngFor="let ancestorOption of ancestorOptions ">{{ancestorOption.first_name}} {{ancestorOption.ordinal_number}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The ancestor of the Habsburger</mat-hint>
+  </mat-form-field>
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!habsburgFormGroup.valid">
+      <span *ngIf="!habsburgFormGroup.controls.pk.value">Create</span>
+      <span *ngIf="habsburgFormGroup.controls.pk.value">Update</span>
+    </button>
+  </mat-card-actions>
+</form>

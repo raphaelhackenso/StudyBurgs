@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Person, PersonService} from '../services/person.service';
 import {INode} from 'ngx-org-chart/lib/node';
 import {Router} from "@angular/router";
+//import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class FamilyComponent implements OnInit {
   }
 
 
-  deleteMovie(person: Person): void {
+  deletePerson(person: Person): void {
     this.personService.deletePerson(person)
       .subscribe(() => {
         this.retrievePersons();
@@ -43,7 +44,7 @@ export class FamilyComponent implements OnInit {
 
   createFamilyTree(inputList: Person[]) {
 
-    var rawNodes = inputList.filter(ele => ele.name_suffix !== 'Stephan von Lothringen').map(person => ({
+    var rawNodes = inputList?.filter(ele => ele.name_suffix !== 'Stephan von Lothringen').map(person => ({
       pk: person.pk,
       ancestor: person.habsburg_ancestor,
       name: person.first_name + ' ' + (person.ordinal_number != null ? person.ordinal_number : '') +
@@ -55,7 +56,7 @@ export class FamilyComponent implements OnInit {
     }));
 
 
-    var sortedNodes = rawNodes.sort((a, b): number => {
+    var sortedNodes = rawNodes?.sort((a, b): number => {
       if (a.ancestor < b.ancestor) return -1;
       if (a.ancestor > b.ancestor) return 1;
       return 0
@@ -68,7 +69,7 @@ export class FamilyComponent implements OnInit {
 
   getNestedChildren(models, parentId) {
     const nestedTreeStructure = [];
-    const length = models.length;
+    const length = models?.length;
 
     for (let i = 0; i < length; i++) {
       const model = models[i];

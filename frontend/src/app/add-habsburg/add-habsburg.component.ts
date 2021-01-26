@@ -35,7 +35,7 @@ export class AddHabsburgComponent implements OnInit {
 
     const now = new Date();
 
-    const defaultDate = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate();
+    const defaultDate = 1700 + '-' + 1 + '-' + 1;
 
     this.habsburgFormGroup = new FormGroup({
       pk: new FormControl(null),

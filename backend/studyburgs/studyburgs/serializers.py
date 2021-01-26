@@ -19,8 +19,8 @@ class PersonSerializer(serializers.ModelSerializer):
     def validate_ordinal_number(self, value):
         # Validate that only I V X and . is allowed
         if value != None:
-            if (bool(re.match('^[ivx.]+$', value.lower()))) == False:
-                raise serializers.ValidationError("Numbers must only be I V X and . ")
+            if (bool(re.match('^[ivxcdm.]+$', value.lower()))) == False:
+                raise serializers.ValidationError("Numbers must only be I V X C D M and . ")
 
         return value
 

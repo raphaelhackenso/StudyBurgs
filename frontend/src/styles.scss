@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f2f2f2ff
+}
 
 .ngx-org {
   &-image {
@@ -14,6 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     padding: 0.25em;
   }
 
+
   &-name {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
@@ -21,6 +29,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   &-title {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   }
+}
+
+
+.ngx-org-ceo {
+  color: #4d4d4dff;
+  background-color: white;
+  width: 100px;
 }
 
 .mat-toolbar.mat-primary {
@@ -37,7 +52,9 @@ mat-progress-bar .mat-progress-bar-fill::after {
 }
 
 
-
+.mat-button.mat-yellow {
+  background-color: #ffd42aff;
+}
 
 .ngx-org {
   &-horizontal {

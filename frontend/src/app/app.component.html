@@ -4,7 +4,11 @@
   <mat-menu #familyMenu="matMenu">
     <button mat-menu-item routerLink="family">List entire family tree</button>
   </mat-menu>
-  <span class="spacer"></span>
+
+  <button mat-button routerLink="details-user">User</button>
+
+  <span class="spacer">
+  </span>
   <app-progress *ngIf="isLoggedIn"></app-progress>
   <app-logout class="mat-button" *ngIf="isLoggedIn"></app-logout>
 </mat-toolbar>

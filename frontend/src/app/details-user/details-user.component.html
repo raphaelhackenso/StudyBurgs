@@ -1,0 +1,54 @@
+<mat-card class="details-user-card">
+  <table class="foobar">
+    <tr>
+      <td>
+        <mat-card-header>
+          <div mat-card-avatar class="habsburg-icon"></div>
+          <mat-card-title>{{user?.username}}</mat-card-title>
+          <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{user?.progress}}</p>
+          <table>
+            <tr>
+              <td>
+                Gejoined:
+              </td>
+              <td>
+                {{user?.date_joined | date : 'd.M.yyyy'}}
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+      </td>
+    </tr>
+  </table>
+</mat-card>
+
+<table mat-table [dataSource]="learneds" matSort class="mat-elevation-z8">
+
+  <!-- state Column -->
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>state</th>
+    <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+  </ng-container>
+
+
+  <!-- learned_person Column -->
+  <ng-container matColumnDef="learned_person">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_person</th>
+    <td mat-cell *matCellDef="let element"> {{element.learned_person}} </td>
+  </ng-container>
+
+  <!-- learned_for_user Column -->
+  <ng-container matColumnDef="learned_for_user">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_for_user</th>
+    <td mat-cell *matCellDef="let element"> {{element.learned_for_user}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+

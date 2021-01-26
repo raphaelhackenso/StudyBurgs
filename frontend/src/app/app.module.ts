@@ -31,6 +31,8 @@ import { AddHabsburgComponent } from './add-habsburg/add-habsburg.component';
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {HttperrorInterceptor} from "./httperror.interceptor";
 import { ProgressComponent } from './progress/progress.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
+import { AddNotesComponent } from './add-notes/add-notes.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ProgressComponent } from './progress/progress.component';
     DetailsComponent,
     AddHabsburgComponent,
     ProgressComponent,
+    DetailsUserComponent,
+    AddNotesComponent,
   ],
     imports: [
         BrowserModule,

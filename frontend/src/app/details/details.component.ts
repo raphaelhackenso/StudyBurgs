@@ -56,7 +56,8 @@ export class DetailsComponent implements OnInit {
     }
 
     this.learnedService.retrieveLearneds()
-      .pipe(map(learnedsResponse => learnedsResponse.filter(learned => learned.learned_person == parseInt(pkFromUrl, 10))[0]))
+      .pipe(map(learnedsResponse => learnedsResponse
+        .filter(learned => learned.learned_person == parseInt(pkFromUrl, 10))[0]))
       .subscribe((learneds) => {
         if (learneds != null) {
           this.learnedFormGroup.patchValue(learneds);
@@ -109,12 +110,6 @@ export class DetailsComponent implements OnInit {
 
 
       });
-  }
-
-  //TODO remove
-  test():void{
-    this.studyburgsUserService.getCurrentUser().subscribe(ele => console.log(ele));
-    console.log(this.studyburgsUserService.getCurrentUserID());
   }
 
 }

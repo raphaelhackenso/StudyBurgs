@@ -1,13 +1,18 @@
 <form [formGroup]="notesFormGroup" (ngSubmit)="createOrUpdateNote()" class="add-notes-form__form">
 
   <mat-form-field>
+    <input matInput type="text" placeholder="title" formControlName="title">
+    <mat-hint align="end">Title of the Note</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
     <textarea matInput placeholder="content" formControlName="content"></textarea>
     <mat-hint align="end">Notes for the Person</mat-hint>
   </mat-form-field>
 
   <br/>
   <mat-card-actions align="center">
-    <button mat-raised-button color="primary" [disabled]="!notesFormGroup.valid">
+    <button mat-button class="mat-yellow" [disabled]="!notesFormGroup.valid">
       <span *ngIf="!notesFormGroup.controls.pk.value">Create</span>
       <span *ngIf="notesFormGroup.controls.pk.value">Update</span>
     </button>

@@ -87,6 +87,7 @@ export class StudyburgsUserService {
     }
   }
 
+
   updateStudyBurgsUser(studyBurgsUser: StudyBurgsUser): Observable<any> {
     return this.http.patch('/api/StudyBurgUsers/' + this.getCurrentUserID() + '/', studyBurgsUser);
   }

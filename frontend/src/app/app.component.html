@@ -6,7 +6,7 @@
 
   <button mat-button routerLink="details-user">User</button>
 
-  <button mat-button routerLink="my-students" >My Students</button>
+  <button mat-button routerLink="my-students" *ngIf="studyburgsUserService.hasNeededPermission('auth.view_group')">My Students</button>
 
   <button mat-button [routerLink]="'/add-habsburg/'" *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.change_person')">
     Add Habsburg

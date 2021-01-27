@@ -30,6 +30,7 @@ export class AddNotesComponent implements OnInit {
       creation_date_time: new FormControl(defaultDate),
       note_for_user: new FormControl(this.studyburgsUserService.getCurrentUserID()),
       note_for_person: new FormControl(this.route.snapshot.paramMap.get('note_for_person')),
+      title: new FormControl(''),
     });
 
 
@@ -51,13 +52,13 @@ export class AddNotesComponent implements OnInit {
       this.notesService.updateNote(this.notesFormGroup.value)
         .subscribe(() => {
           alert('Note updated successfully!');
-          this.router.navigate(['family']);
+          this.router.navigate(['/details/' + this.route.snapshot.paramMap.get('note_for_person')]);
         });
     } else {
       this.notesService.createNote(this.notesFormGroup.value)
         .subscribe((note) => {
           alert('Note created successfully!');
-          this.router.navigate(['family']);
+          this.router.navigate(['/details/' + this.route.snapshot.paramMap.get('note_for_person')]);
         });
     }
   }

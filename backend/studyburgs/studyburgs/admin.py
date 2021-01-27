@@ -42,7 +42,7 @@ class StudyBurgsUserAdmin(admin.ModelAdmin):
 
 # NotesAdmin, filterable by user and person
 class NotesAdmin(admin.ModelAdmin):
-    list_display = ('content', 'creation_date_time', 'note_for_user', 'note_for_person')
+    list_display = ('content', 'creation_date_time', 'note_for_user', 'note_for_person', 'title')
 
 
 

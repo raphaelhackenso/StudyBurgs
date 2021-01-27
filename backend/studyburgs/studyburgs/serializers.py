@@ -59,4 +59,4 @@ class StudyburgsUserSerializer(serializers.ModelSerializer):
 class NotesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Notes
-        fields = ['pk', 'content', 'creation_date_time', 'note_for_user', 'note_for_person']
+        fields = ['pk', 'content', 'creation_date_time', 'note_for_user', 'note_for_person', 'title']

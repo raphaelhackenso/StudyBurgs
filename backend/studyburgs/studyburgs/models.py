@@ -104,6 +104,7 @@ class StudyburgsUser(AbstractUser):
 '''
 class Notes(models.Model):
     content = models.TextField()
+    title = models.TextField(null=True)
     creation_date_time = models.DateTimeField()
     note_for_user = models.ForeignKey(StudyburgsUser, on_delete=models.SET_NULL, null=True, related_name='users_notes')
     note_for_person = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True)

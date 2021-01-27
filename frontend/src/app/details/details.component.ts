@@ -20,7 +20,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {filter, map} from "rxjs/operators";
 import {forkJoin} from "rxjs";
 import {ProgressComponent} from "../progress/progress.component";
-import {NotesService} from "../services/notes.service";
+import {Note, NotesService} from "../services/notes.service";
 
 
 @Component({
@@ -32,6 +32,9 @@ export class DetailsComponent implements OnInit {
   habsburg: Person;
   learnedFormGroup: FormGroup;
   learnedHabsburg: Learned;
+
+  notes: Note[];
+  displayedColumns = ['content', 'creation_date_time', 'title', 'edit', 'delete'];
 
 
   constructor(private router: Router, private personService: PersonService, private route: ActivatedRoute, public studyburgsUserService: StudyburgsUserService,
@@ -67,6 +70,10 @@ export class DetailsComponent implements OnInit {
         }
 
       });
+
+
+    this.retrieveNotes();
+
 
   }
 
@@ -109,6 +116,24 @@ export class DetailsComponent implements OnInit {
             window.location.reload()
           })
 
+      });
+  }
+
+  private retrieveNotes(): void{
+    this.notesService.getNotes()
+      .pipe(map(notesResponse => notesResponse
+        .filter(singleNote => singleNote.note_for_user == this.studyburgsUserService.getCurrentUserID())
+        .filter(newFilteredNote => newFilteredNote.note_for_person.toString() == this.route.snapshot.paramMap.get('pk'))))
+      .subscribe((filteredNotes) => {
+        this.notes = filteredNotes;
+      })
+  }
+
+  deleteNote(note: Note): void {
+    this.notesService.deleteNote(note)
+      .subscribe(() => {
+        this.retrieveNotes();
+        alert('Note deleted successfully!');
       });
   }
 

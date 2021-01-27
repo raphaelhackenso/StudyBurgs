@@ -8,8 +8,9 @@ export interface Note {
   pk: number;
   content: string;
   creation_date_time: Date;
-  note_for_user: StudyBurgsUser;
+  note_for_user: number;
   note_for_person: number;
+  title: string;
 }
 
 @Injectable({
@@ -35,6 +36,10 @@ export class NotesService {
 
   createNote(note: Note): Observable<Note> {
     return this.http.post<Note>('/api/notes/', note);
+  }
+
+  deleteNote(note: Note): Observable<any> {
+    return this.http.delete('/api/notes/' + note.pk + '/');
   }
 
 }

@@ -5,10 +5,12 @@ from rest_framework.exceptions import PermissionDenied
 from . import serializers
 from . import models
 
-#TODO PERSMISIONS
+
+# TODO PERSMISIONS
 # -------------------
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = models.Person.objects.all()
+    permission_classes = (DjangoModelPermissions,)
 
     serializer_class = serializers.PersonSerializer
 
@@ -25,6 +27,7 @@ class PersonViewSet(viewsets.ModelViewSet):
 # -------------------
 class MarriageViewSet(viewsets.ModelViewSet):
     queryset = models.Marriage.objects.all()
+    permission_classes = (DjangoModelPermissions,)
 
     serializer_class = serializers.MarriageSerializer
 
@@ -44,7 +47,7 @@ class MarriageViewSet(viewsets.ModelViewSet):
 # -------------------
 class LearnedViewSet(viewsets.ModelViewSet):
     queryset = models.Learned.objects.all()
-    #permission_classes = (DjangoModelPermissions,)
+    permission_classes = (DjangoModelPermissions,)
     serializer_class = serializers.LearnedSerializer
 
     def list(self, request):
@@ -57,10 +60,10 @@ class LearnedViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         if user is not None:
-            if not user.is_superuser:
+            if not user.groups.filter(name__in=['Admins', 'Teacher']).exists():
                 return self.queryset.filter(learned_for_user=user)
             else:
-                return self.queryset
+                return self.queryset.all()
         else:
             return self.queryset.none()
 
@@ -68,6 +71,7 @@ class LearnedViewSet(viewsets.ModelViewSet):
 # -------------------
 class StudyBurgsUserViewSet(viewsets.ModelViewSet):
     queryset = models.StudyburgsUser.objects.all()
+    permission_classes = (DjangoModelPermissions,)
     serializer_class = serializers.StudyburgsUserSerializer
 
     def list(self, request):
@@ -75,8 +79,6 @@ class StudyBurgsUserViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
 
         return Response(self.serializer_class(queryset, many=True).data)
-
-
 
     def get_queryset(self):
         user = self.request.user
@@ -93,5 +95,5 @@ class StudyBurgsUserViewSet(viewsets.ModelViewSet):
 # -------------------
 class NotesViewSet(viewsets.ModelViewSet):
     queryset = models.Notes.objects.all()
-
+    permission_classes = (DjangoModelPermissions,)
     serializer_class = serializers.NotesSerializer

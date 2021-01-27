@@ -7,6 +7,7 @@ import {DetailsComponent} from "./details/details.component";
 import {AddHabsburgComponent} from "./add-habsburg/add-habsburg.component";
 import {AddNotesComponent} from "./add-notes/add-notes.component";
 import {DetailsUserComponent} from "./details-user/details-user.component";
+import {MyStudentsComponent} from "./my-students/my-students.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'family', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'add-notes/:pk', component: AddNotesComponent, canActivate: [AuthGuard]},
   {path: 'add-notes', component: AddNotesComponent, canActivate: [AuthGuard]},
   {path: 'details-user', component: DetailsUserComponent, canActivate: [AuthGuard]},
+  {path: 'my-students', component: MyStudentsComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

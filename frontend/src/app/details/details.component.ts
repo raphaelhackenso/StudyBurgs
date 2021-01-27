@@ -20,6 +20,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {filter, map} from "rxjs/operators";
 import {forkJoin} from "rxjs";
 import {ProgressComponent} from "../progress/progress.component";
+import {NotesService} from "../services/notes.service";
 
 
 @Component({
@@ -34,7 +35,7 @@ export class DetailsComponent implements OnInit {
 
 
   constructor(private router: Router, private personService: PersonService, private route: ActivatedRoute, public studyburgsUserService: StudyburgsUserService,
-              public learnedService: LearnedService) {
+              public learnedService: LearnedService, public notesService: NotesService) {
   }
 
   ngOnInit(): void {
@@ -57,7 +58,8 @@ export class DetailsComponent implements OnInit {
 
     this.learnedService.retrieveLearneds()
       .pipe(map(learnedsResponse => learnedsResponse
-        .filter(learned => learned.learned_person == parseInt(pkFromUrl, 10))[0]))
+        .filter(learned => learned.learned_person == parseInt(pkFromUrl, 10)
+          && learned.learned_for_user == this.studyburgsUserService.getCurrentUserID())[0]))
       .subscribe((learneds) => {
         if (learneds != null) {
           this.learnedFormGroup.patchValue(learneds);
@@ -66,11 +68,10 @@ export class DetailsComponent implements OnInit {
 
       });
 
-
   }
 
 
-  learnHabsburger(): void {
+  createOrUpdateLearned(): void {
     const pkFromFormGroup = this.learnedFormGroup.value.pk;
     if (pkFromFormGroup) {
       this.learnedService.updateLearned(this.learnedFormGroup.value)
@@ -92,7 +93,7 @@ export class DetailsComponent implements OnInit {
     forkJoin({
       requestMyLearneds: this.learnedService.retrieveLearneds()
         .pipe(map(learnedsResponse => learnedsResponse
-          .filter(learned => learned.state == true))),
+          .filter(learned => learned.state == true && learned.learned_for_user == this.studyburgsUserService.getCurrentUserID()))),
       requestPersons: this.personService.getPersons(),
       requestCurrentUser: this.studyburgsUserService.getCurrentUser(),
     })
@@ -103,13 +104,13 @@ export class DetailsComponent implements OnInit {
         //console.log(requestCurrentUser);
 
         this.studyburgsUserService.updateStudyBurgsUser(requestCurrentUser)
-          .subscribe((response) =>{
+          .subscribe((response) => {
             console.log("Progess Updated");
             window.location.reload()
           })
 
-
       });
   }
+
 
 }

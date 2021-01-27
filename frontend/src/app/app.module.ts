@@ -33,6 +33,7 @@ import {HttperrorInterceptor} from "./httperror.interceptor";
 import { ProgressComponent } from './progress/progress.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { AddNotesComponent } from './add-notes/add-notes.component';
+import { MyStudentsComponent } from './my-students/my-students.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AddNotesComponent } from './add-notes/add-notes.component';
     ProgressComponent,
     DetailsUserComponent,
     AddNotesComponent,
+    MyStudentsComponent,
   ],
     imports: [
         BrowserModule,

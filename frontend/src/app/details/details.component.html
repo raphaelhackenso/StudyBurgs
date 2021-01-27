@@ -29,13 +29,13 @@
           </table>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button style="color: black" [routerLink]="'/add-habsburg/' + habsburg.pk"
+          <button mat-button style="color: black" [routerLink]="'/add-habsburg/' + habsburg?.pk"
                   *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.change_person')">Edit
           </button>
-          <button mat-button>VIEW NOTES</button>
+          <button mat-button [routerLink]="['/add-notes',{note_for_person: habsburg?.pk}]">ADD NOTE</button>
         </mat-card-actions>
 
-        <form [formGroup]="learnedFormGroup" (ngSubmit)="learnHabsburger()">
+        <form [formGroup]="learnedFormGroup" (ngSubmit)="createOrUpdateLearned()">
           <table style="width: 250px">
             <tr>
               <td>

@@ -1,17 +1,20 @@
 <mat-toolbar color="primary">
   <img src="assets/header.png" alt="StudyBurgs" style="height:30px">
-  <button mat-button [matMenuTriggerFor]="familyMenu">Family</button>
-  <mat-menu #familyMenu="matMenu">
-    <button mat-menu-item routerLink="family">List entire family tree</button>
-  </mat-menu>
+
+
+  <button mat-button routerLink="family">Family</button>
 
   <button mat-button routerLink="details-user">User</button>
+
+  <button mat-button routerLink="my-students" >My Students</button>
+
+  <button mat-button [routerLink]="'/add-habsburg/'" *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.change_person')">
+    Add Habsburg
+  </button>
 
   <span class="spacer">
   </span>
   <app-progress *ngIf="isLoggedIn"></app-progress>
   <app-logout class="mat-button" *ngIf="isLoggedIn"></app-logout>
 </mat-toolbar>
-
-
 <router-outlet></router-outlet>

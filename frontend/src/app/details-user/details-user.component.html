@@ -25,25 +25,18 @@
   </table>
 </mat-card>
 
-<table mat-table [dataSource]="learneds" matSort class="mat-elevation-z8">
+<table mat-table [dataSource]="studentslearned" matSort class="mat-elevation-z8">
 
-  <!-- state Column -->
-  <ng-container matColumnDef="state">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>state</th>
-    <td mat-cell *matCellDef="let element"> {{element.state}} </td>
+  <!-- student Column -->
+  <ng-container matColumnDef="student">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>student</th>
+    <td mat-cell *matCellDef="let element"> {{element?.student}} </td>
   </ng-container>
 
-
-  <!-- learned_person Column -->
-  <ng-container matColumnDef="learned_person">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_person</th>
-    <td mat-cell *matCellDef="let element"> {{element.learned_person}} </td>
-  </ng-container>
-
-  <!-- learned_for_user Column -->
-  <ng-container matColumnDef="learned_for_user">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_for_user</th>
-    <td mat-cell *matCellDef="let element"> {{element.learned_for_user}} </td>
+  <!-- learned_habsburger Column -->
+  <ng-container matColumnDef="learned_habsburger">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_habsburger</th>
+    <td mat-cell *matCellDef="let element"> {{element?.learned_habsburger}} </td>
   </ng-container>
 
 

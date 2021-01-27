@@ -8,7 +8,7 @@ export interface Learned {
   pk: number;
   state: boolean;
   learned_person: number;
-  learned_for_user: StudyBurgsUser;
+  learned_for_user: number;
 
 }
 

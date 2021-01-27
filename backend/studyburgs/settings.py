@@ -129,7 +129,6 @@ def custom_jwt_payload_handler(user):
     from rest_framework_jwt.utils import jwt_payload_handler
     jwt_paylout = jwt_payload_handler(user)
     jwt_paylout['permissions'] = dict.fromkeys(user.get_all_permissions())
-    #jwt_paylout['currentUser'] = user.username;
     return jwt_paylout
 
 

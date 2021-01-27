@@ -37,7 +37,7 @@ class LearnedAdmin(admin.ModelAdmin):
 
 # StudyBurgsUserAdmin
 class StudyBurgsUserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'progress' 'last_name', 'first_name', 'email', 'date_joined')
+    list_display = ('username', 'progress' 'last_name', 'first_name', 'email', 'date_joined', 'groupsReference')
 
 
 # NotesAdmin, filterable by user and person

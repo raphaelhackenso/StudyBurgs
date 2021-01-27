@@ -81,6 +81,7 @@ class Marriage(models.Model):
 '''
 class StudyburgsUser(AbstractUser):
     progress = models.FloatField(default=0.0)
+    groupsReference = models.TextField(null=True)
 
 
     # Notes can be accessed by the related name = 'users_note'

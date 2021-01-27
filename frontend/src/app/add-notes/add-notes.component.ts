@@ -29,7 +29,7 @@ export class AddNotesComponent implements OnInit {
       content: new FormControl(''),
       creation_date_time: new FormControl(defaultDate),
       note_for_user: new FormControl(this.studyburgsUserService.getCurrentUserID()),
-      note_for_person: new FormControl(1), //TODO <- upate this to get the actual person
+      note_for_person: new FormControl(this.route.snapshot.paramMap.get('note_for_person')),
     });
 
 

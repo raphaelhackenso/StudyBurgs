@@ -14,6 +14,7 @@ export interface StudyBurgsUser {
   first_name: string;
   email: string;
   date_joined: Date;
+  groupsReference: string;
 
 
 }
@@ -88,6 +89,10 @@ export class StudyburgsUserService {
 
   updateStudyBurgsUser(studyBurgsUser: StudyBurgsUser): Observable<any> {
     return this.http.patch('/api/StudyBurgUsers/' + this.getCurrentUserID() + '/', studyBurgsUser);
+  }
+
+  getStudyburgUsers(): Observable<StudyBurgsUser[]> {
+    return this.http.get<StudyBurgsUser[]>('/api/StudyBurgUsers/');
   }
 
 

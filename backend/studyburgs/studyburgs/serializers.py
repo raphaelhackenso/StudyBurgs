@@ -52,7 +52,7 @@ class LearnedSerializer(serializers.ModelSerializer):
 class StudyburgsUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StudyburgsUser
-        fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined']
+        fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined', 'groupsReference']
 
 
 # NotesSerializer

@@ -13,12 +13,17 @@ import {Router} from "@angular/router";
 })
 export class FamilyComponent implements OnInit {
 
+
+
+
   constructor(private personService: PersonService, private router: Router) {
+
 
   }
 
   persons: Person[];
-  displayedColumns = ['first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death','picture_url', 'habsburg_ancestor',];
+  displayedColumns = ['first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death', 'picture_url', 'habsburg_ancestor',];
+
 
 
   ngOnInit(): void {
@@ -44,7 +49,7 @@ export class FamilyComponent implements OnInit {
 
   createFamilyTree(inputList: Person[]) {
 
-    var rawNodes = inputList?.filter(ele => ele.name_suffix !== 'Stephan von Lothringen').map(person => ({
+    var rawNodes = inputList?.map(person => ({
       pk: person.pk,
       ancestor: person.habsburg_ancestor,
       name: person.first_name + ' ' + (person.ordinal_number != null ? person.ordinal_number : '') +

@@ -65,7 +65,7 @@ export class FamilyComponent implements OnInit {
       ancestor: person.habsburg_ancestor,
       name: person.first_name + ' ' + (person.ordinal_number != null ? person.ordinal_number : '') +
         ' ' + (person.name_suffix != null ? person.name_suffix : ''),
-      cssClass: this.learneds.filter(singleLearned => singleLearned.learned_person == person.pk).length > 0 ? 'ngx-org-learned' : 'ngx-org-standard',
+      cssClass: this.learneds?.filter(singleLearned => singleLearned.learned_person == person.pk).length > 0 ? 'ngx-org-learned' : 'ngx-org-standard',
       image: '',
       title: person.date_of_birth + ' - ' + person.date_of_death,
       childs: []

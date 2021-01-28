@@ -28,14 +28,14 @@ class Person(models.Model):
     )
 
     first_name = models.TextField()
-    ordinal_number = models.TextField(null=True)
-    name_suffix = models.TextField(null=True)
+    ordinal_number = models.TextField(blank=True, null=True)
+    name_suffix = models.TextField(default='', blank=True, null=True)
     date_of_birth = models.DateField()
     date_of_death = models.DateField()
-    birthplace = models.TextField(null=True)
-    description = models.TextField(null=True)
+    birthplace = models.TextField(default='', blank=True, null=True)
+    description = models.TextField(default='', blank=True, null=True)
     gender = models.CharField(max_length=1, choices=CHOICES)
-    picture_url = models.TextField(null=True)
+    picture_url = models.TextField(default='', blank=True, null=True)
     habsburg_ancestor = models.ForeignKey('self', related_name='habsburg_ancestor_person', on_delete=models.SET_NULL,
                                           null=True)
 
@@ -103,8 +103,8 @@ class StudyburgsUser(AbstractUser):
 * note_for_person: which Hapsburg the note is linked to.
 '''
 class Notes(models.Model):
-    content = models.TextField()
-    title = models.TextField(null=True)
+    content = models.TextField(blank=True, null=True)
+    title = models.TextField(blank=True, null=True)
     creation_date_time = models.DateTimeField()
     note_for_user = models.ForeignKey(StudyburgsUser, on_delete=models.SET_NULL, null=True, related_name='users_notes')
     note_for_person = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True)

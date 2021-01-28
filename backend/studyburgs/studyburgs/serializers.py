@@ -8,7 +8,7 @@ class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Person
         fields = ['pk', 'first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death',
-                  'birthplace', 'description', 'gender','picture_url', 'habsburg_ancestor']
+                  'birthplace', 'description', 'gender', 'picture_url', 'habsburg_ancestor']
 
     def validate(self, data):
         # Validate that DoD is after DoB.
@@ -19,11 +19,11 @@ class PersonSerializer(serializers.ModelSerializer):
     def validate_ordinal_number(self, value):
         # Validate that only I V X and . is allowed
         if value != None:
-            if (bool(re.match('^[ivxcdm.]+$', value.lower()))) == False:
-                raise serializers.ValidationError("Numbers must only be I V X C D M and . ")
+            if not (bool(re.match('^[ivxcdm.]+$', value.lower()))):
+                if not value == '':
+                    raise serializers.ValidationError("Numbers must only be I V X C D M and . ")
 
         return value
-
 
 
 # MarriageSerializer

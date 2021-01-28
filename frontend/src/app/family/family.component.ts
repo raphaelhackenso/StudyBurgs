@@ -3,6 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Person, PersonService} from '../services/person.service';
 import {INode} from 'ngx-org-chart/lib/node';
 import {Router} from "@angular/router";
+import {StudyburgsUserService} from "../services/studyburgsUser.service";
+import {Learned, LearnedService} from "../services/learned.service";
+import {map} from "rxjs/operators";
+
 //import { filter } from 'rxjs/operators';
 
 
@@ -13,21 +17,28 @@ import {Router} from "@angular/router";
 })
 export class FamilyComponent implements OnInit {
 
+  persons: Person[];
+  learneds: Learned[];
 
 
-
-  constructor(private personService: PersonService, private router: Router) {
-
+  constructor(private personService: PersonService, private router: Router,
+              private studyburgsUserService: StudyburgsUserService, private learnedService: LearnedService) {
 
   }
-
-  persons: Person[];
-  displayedColumns = ['first_name', 'ordinal_number', 'name_suffix', 'date_of_birth', 'date_of_death', 'picture_url', 'habsburg_ancestor',];
-
 
 
   ngOnInit(): void {
     this.retrievePersons();
+
+    this.learnedService.retrieveLearneds()
+      .pipe(map(learnedResponse => learnedResponse
+        .filter(learned => learned.learned_for_user == this.studyburgsUserService.getCurrentUserID())
+        .filter((filtertedLearned => filtertedLearned.state == true))))
+      .subscribe((ele) => {
+        this.learneds = ele;
+      });
+
+
   }
 
 
@@ -54,7 +65,7 @@ export class FamilyComponent implements OnInit {
       ancestor: person.habsburg_ancestor,
       name: person.first_name + ' ' + (person.ordinal_number != null ? person.ordinal_number : '') +
         ' ' + (person.name_suffix != null ? person.name_suffix : ''),
-      cssClass: 'ngx-org-ceo',
+      cssClass: this.learneds.filter(singleLearned => singleLearned.learned_person == person.pk).length > 0 ? 'ngx-org-learned' : 'ngx-org-standard',
       image: '',
       title: person.date_of_birth + ' - ' + person.date_of_death,
       childs: []
@@ -111,4 +122,3 @@ groupByAncestor(objectArray, property) {
   }, {});
 }
 */
-

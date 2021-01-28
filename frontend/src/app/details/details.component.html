@@ -40,12 +40,8 @@
             <tr>
               <td>
                 <mat-checkbox formControlName="state">
-                  <div *ngIf="learnedFormGroup.controls.pk.value">
-                    <span *ngIf="!learnedHabsburg.state">Learned?</span>
-                    <span *ngIf="learnedHabsburg.state">Learned?</span>
-                  </div>
-                  <div *ngIf="!learnedFormGroup.controls.pk.value">
-                    <span>Not yet learned</span>
+                  <div>
+                    <span>Learned?</span>
                   </div>
                 </mat-checkbox>
               </td>

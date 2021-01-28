@@ -45,10 +45,11 @@ export class DetailsUserComponent implements OnInit {
           .filter(note => note?.note_for_user == this.studyburgsUserService.getCurrentUserID())
           .sort((a, b) => a.note_for_person - b.note_for_person))),
 
-      // Only learned habsburgs that the current user hast already learned
+      // Only learned habsburgs that the current user has already learned
       requestLearneds: this.learnedService.retrieveLearneds()
         .pipe(map(learnedsResponse => learnedsResponse
-          .filter(learned => learned?.state == true))),
+          .filter(learned => learned?.state == true)
+          .filter(filteredLearned => filteredLearned.learned_for_user == this.studyburgsUserService.getCurrentUserID()))),
     })
       .subscribe(({requestPersons, requestNotes, requestCurUser, requestLearneds}) => {
         this.learneds = requestLearneds;
@@ -66,9 +67,6 @@ export class DetailsUserComponent implements OnInit {
             })
           );
         }
-
-        //console.log('allHabsburgsNotes');
-        //console.log(this.habsburgsNotes);
 
       });
 

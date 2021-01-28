@@ -1,31 +1,46 @@
-<table id="excel-table">
+<table style="width: 80%">
   <tr>
-    <th>Student</th>
-    <th>Progress %</th>
-    <th>Progress absolute</th>
-    <th>Total Habsburgs</th>
-    <th>Learned Habsburger</th>
-  </tr>
-  <tr *ngFor="let student of students">
-    <td>{{ student?.username }}</td>
-    <td>{{ student?.progress }}</td>
     <td>
-      {{math?.round((student?.progress/100) * persons?.length)}}
-    </td>
-    <td>
-      {{persons?.length}}
-    </td>
-    <td>
-      <div *ngFor="let entry of studentslearned">
-        <div *ngIf="entry?.student == student?.username">
+      <div>
+        <table id="excel-table" class="mat-table" style="text-align: center">
+          <tr>
+            <th style="width: 20%">Student</th>
+            <th style="width: 20%">Progress %</th>
+            <th style="width: 20%">Progress absolute</th>
+            <th style="width: 20%">Total Habsburgs</th>
+            <th style="width: 20%">Learned Habsburger</th>
+          </tr>
+          <td colspan="5"> <hr /> </td>
+          <tr *ngFor="let student of students">
+            <td>{{ student?.username }}</td>
+            <td>{{ student?.progress }}</td>
+            <td>
+              {{math?.round((student?.progress / 100) * persons?.length)}}
+            </td>
+            <td>
+              {{persons?.length}}
+            </td>
+            <td>
+      <span *ngFor="let entry of studentslearned">
+        <span *ngIf="entry?.student == student?.username">
           {{entry?.learned_habsburger}},
-        </div>
+        </span>
+
+      </span>
+            </td>
+
+          </tr>
+        </table>
       </div>
     </td>
-
+  </tr>
+  <tr >
+    <td  style="text-align: end">
+      <div>
+        <button mat-button class="mat-yellow" (click)="exportexcel()">
+          <span>Download Excel</span>
+        </button>
+      </div>
+    </td>
   </tr>
 </table>
-
-<button mat-button class="mat-yellow" (click)="exportexcel()">
-  <span>Download Excel</span>
-</button>

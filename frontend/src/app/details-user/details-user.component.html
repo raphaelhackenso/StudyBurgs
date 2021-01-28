@@ -8,13 +8,7 @@
           <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-
           <app-progress></app-progress>
-
-
-          Group: {{user?.groupsReference}}
-
-
           <table>
             <tr>
               <td>
@@ -24,66 +18,66 @@
                 {{user?.date_joined | date : 'd.M.yyyy'}}
               </td>
             </tr>
+            <tr>
+              <td>
+                Group:
+              </td>
+              <td>
+                {{user?.groupsReference}}
+              </td>
+            </tr>
           </table>
         </mat-card-content>
       </td>
     </tr>
   </table>
 
-
 </mat-card>
-
-
 <ng-template ngFor let-person [ngForOf]="persons" let-i="index">
-  <h1> {{person?.first_name}} {{person?.ordinal_number}} </h1>
-
+  <h4> {{person?.first_name}} {{person?.ordinal_number}} </h4>
   <div>
-    <button mat-button [routerLink]="['/add-notes',{note_for_person: person?.pk}]">ADD NOTE</button>
+    <button mat-button color="primary" [routerLink]="['/add-notes',{note_for_person: person?.pk}]">ADD NOTE</button>
   </div>
-
-
-  <ng-template ngFor let-habsburgsNote [ngForOf]="habsburgsNotes" let-e="index">
-    <div *ngIf="habsburgsNote?.learned_habsburger == person?.pk">
-
-
-      <td VALIGN="top">
-        <mat-card class="notes-card">
-          <mat-card-header>
-            <div mat-card-avatar class="notes-icon"></div>
-            <mat-card-title>
-              {{habsburgsNote?.notes?.title}}
-            </mat-card-title>
-            <mat-card-subtitle>
-              {{habsburgsNote?.notes?.creation_date_time | date : 'd.M.yyyy'}}
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            {{habsburgsNote?.notes?.content}}
-          </mat-card-content>
-          <mat-card-actions>
-            <table>
-              <tr>
-                <td>
-                  <button mat-button style="color: black"
-                          [routerLink]="['/add-notes/' + habsburgsNote?.notes?.pk ,{note_for_person: person?.pk}]">Edit
-                  </button>
-                </td>
-                <td>
-                  <button mat-button style="color: darkred" (click)="deleteNote(habsburgsNote?.notes)"
-                          *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.delete_notes')">Delete
-                  </button>
-                </td>
-              </tr>
-            </table>
-          </mat-card-actions>
-        </mat-card>
-      </td>
-
-
-    </div>
-  </ng-template>
-
+  <table>
+    <tr>
+      <ng-template ngFor let-habsburgsNote [ngForOf]="habsburgsNotes" let-e="index">
+        <td VALIGN="top">
+          <div *ngIf="habsburgsNote?.learned_habsburger == person?.pk">
+            <mat-card class="notes-card">
+              <mat-card-header>
+                <div mat-card-avatar class="notes-icon"></div>
+                <mat-card-title>
+                  {{habsburgsNote?.notes?.title}}
+                </mat-card-title>
+                <mat-card-subtitle>
+                  {{habsburgsNote?.notes?.creation_date_time | date : 'd.M.yyyy'}}
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                {{habsburgsNote?.notes?.content}}
+              </mat-card-content>
+              <mat-card-actions>
+                <table>
+                  <tr>
+                    <td>
+                      <button mat-button style="color: black"
+                              [routerLink]="['/add-notes/' + habsburgsNote?.notes?.pk ,{note_for_person: person?.pk}]">
+                        Edit
+                      </button>
+                    </td>
+                    <td>
+                      <button mat-button style="color: darkred" (click)="deleteNote(habsburgsNote?.notes)"
+                              *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.delete_notes')">Delete
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </td>
+      </ng-template>
+    </tr>
+  </table>
 
 </ng-template>
-
-

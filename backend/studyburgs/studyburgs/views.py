@@ -6,7 +6,6 @@ from . import serializers
 from . import models
 
 
-
 # -------------------
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = models.Person.objects.all()
@@ -80,6 +79,7 @@ class StudyBurgsUserViewSet(viewsets.ModelViewSet):
 
         return Response(self.serializer_class(queryset, many=True).data)
 
+
     def get_queryset(self):
         user = self.request.user
 
@@ -90,6 +90,8 @@ class StudyBurgsUserViewSet(viewsets.ModelViewSet):
                 return self.queryset
         else:
             return self.queryset.none()
+
+
 
 
 # -------------------

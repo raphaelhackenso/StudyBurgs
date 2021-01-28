@@ -1,5 +1,7 @@
-<div>
-  <ngx-org-chart [nodes]="createFamilyTree(persons)" direction="vertical"
-                 (itemClick)="getPersonNotePk($event)"></ngx-org-chart>
+<div style="position: fixed; overflow: scroll; max-width: 100%; max-height: 90vh;">
+  <div style="width: 5000px">
+    <ngx-org-chart [nodes]="createFamilyTree(persons)" direction="vertical"
+                   (itemClick)="getPersonNotePk($event)"></ngx-org-chart>
+  </div>
 </div>
 

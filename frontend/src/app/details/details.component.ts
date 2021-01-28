@@ -91,7 +91,6 @@ export class DetailsComponent implements OnInit {
         .subscribe((learned) => {
           alert('created successfully!');
           this.recalculateProgress();
-          this.router.navigate(['/']);
         });
     }
   }

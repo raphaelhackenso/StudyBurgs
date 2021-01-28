@@ -6,6 +6,9 @@ import {Learned, LearnedService} from "../services/learned.service";
 import {map} from "rxjs/operators";
 import {StudentLearneds} from "../services/student-learneds";
 import {forkJoin} from "rxjs";
+import {Note, NotesService} from "../services/notes.service";
+import {Habsburgsnotes} from "../services/habsburgsnotes";
+import {JSDocTagName} from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: 'app-details-user',
@@ -17,13 +20,13 @@ export class DetailsUserComponent implements OnInit {
   learneds: Learned[];
   persons: Person[];
   studentslearned: StudentLearneds[];
+  habsburgsNotes: Habsburgsnotes[] = [];
 
 
   constructor(private router: Router, private personService: PersonService, private route: ActivatedRoute, public studyburgsUserService: StudyburgsUserService,
-              public learnedService: LearnedService) {
+              public learnedService: LearnedService, public notesService: NotesService) {
   }
 
-  displayedColumns = ['student', 'learned_habsburger',];
 
   ngOnInit(): void {
 
@@ -34,29 +37,50 @@ export class DetailsUserComponent implements OnInit {
 
     forkJoin({
       requestPersons: this.personService.getPersons(),
-      requestUsers: this.studyburgsUserService.getStudyburgUsers(),
+      requestCurUser: this.studyburgsUserService.getCurrentUser(),
+
+      // Only notes that belong to the current user
+      requestNotes: this.notesService.getNotes()
+        .pipe(map(notesResponse => notesResponse
+          .filter(note => note?.note_for_user == this.studyburgsUserService.getCurrentUserID())
+          .sort((a, b) => a.note_for_person - b.note_for_person))),
+
+      // Only learned habsburgs that the current user hast already learned
       requestLearneds: this.learnedService.retrieveLearneds()
         .pipe(map(learnedsResponse => learnedsResponse
           .filter(learned => learned?.state == true))),
     })
-      .subscribe(({requestPersons, requestUsers, requestLearneds}) => {
+      .subscribe(({requestPersons, requestNotes, requestCurUser, requestLearneds}) => {
         this.learneds = requestLearneds;
-        this.persons = requestPersons;
 
+        // Get the persons that the current user has already learned
+        this.persons = requestLearneds.map(ele => requestPersons.filter(singlePerson => singlePerson.pk == ele.learned_person)[0]);
 
-        var allLearneds: StudentLearneds[] = requestLearneds.map(ele => ({
-          learned_habsburger: requestPersons
-            .filter(singlePerson => singlePerson.pk == ele.learned_person)[0].first_name + ' ' + requestPersons
-            .filter(singlePerson => singlePerson.pk == ele.learned_person)[0]?.ordinal_number,
-          student: requestUsers.filter(singleUser => singleUser.pk == ele.learned_for_user)[0].username
-        }));
-        //console.log(allLearneds);
+        // Custom Habsburgsnotes class containing the learned person and one corresponding note
+        for (let singleNote of requestNotes) {
+          this.habsburgsNotes.push(
+            ({
+              learned_habsburger: requestPersons
+                .filter(singlePerson => singlePerson.pk == singleNote.note_for_person)[0]?.pk,
+              notes: singleNote
+            })
+          );
+        }
 
-        this.studentslearned = allLearneds;
+        //console.log('allHabsburgsNotes');
+        //console.log(this.habsburgsNotes);
 
       });
 
+  }
 
+
+  deleteNote(note: Note): void {
+    this.notesService.deleteNote(note)
+      .subscribe(() => {
+        alert('Note deleted successfully!');
+        window.location.reload();
+      });
   }
 
 }

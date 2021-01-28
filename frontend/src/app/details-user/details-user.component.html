@@ -8,7 +8,13 @@
           <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>{{user?.progress}}</p>
+
+          <app-progress></app-progress>
+
+
+          Group: {{user?.groupsReference}}
+
+
           <table>
             <tr>
               <td>
@@ -23,25 +29,61 @@
       </td>
     </tr>
   </table>
+
+
 </mat-card>
 
-<table mat-table [dataSource]="studentslearned" matSort class="mat-elevation-z8">
 
-  <!-- student Column -->
-  <ng-container matColumnDef="student">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>student</th>
-    <td mat-cell *matCellDef="let element"> {{element?.student}} </td>
-  </ng-container>
+<ng-template ngFor let-person [ngForOf]="persons" let-i="index">
+  <h1> {{person?.first_name}} {{person?.ordinal_number}} </h1>
 
-  <!-- learned_habsburger Column -->
-  <ng-container matColumnDef="learned_habsburger">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>learned_habsburger</th>
-    <td mat-cell *matCellDef="let element"> {{element?.learned_habsburger}} </td>
-  </ng-container>
+  <div>
+    <button mat-button [routerLink]="['/add-notes',{note_for_person: person?.pk}]">ADD NOTE</button>
+  </div>
 
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <ng-template ngFor let-habsburgsNote [ngForOf]="habsburgsNotes" let-e="index">
+    <div *ngIf="habsburgsNote?.learned_habsburger == person?.pk">
+
+
+      <td VALIGN="top">
+        <mat-card class="notes-card">
+          <mat-card-header>
+            <div mat-card-avatar class="notes-icon"></div>
+            <mat-card-title>
+              {{habsburgsNote?.notes?.title}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{habsburgsNote?.notes?.creation_date_time | date : 'd.M.yyyy'}}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            {{habsburgsNote?.notes?.content}}
+          </mat-card-content>
+          <mat-card-actions>
+            <table>
+              <tr>
+                <td>
+                  <button mat-button style="color: black"
+                          [routerLink]="['/add-notes/' + habsburgsNote?.notes?.pk ,{note_for_person: person?.pk}]">Edit
+                  </button>
+                </td>
+                <td>
+                  <button mat-button style="color: darkred" (click)="deleteNote(habsburgsNote?.notes)"
+                          *ngIf="studyburgsUserService.hasNeededPermission('studyburgs.delete_notes')">Delete
+                  </button>
+                </td>
+              </tr>
+            </table>
+          </mat-card-actions>
+        </mat-card>
+      </td>
+
+
+    </div>
+  </ng-template>
+
+
+</ng-template>
 
 

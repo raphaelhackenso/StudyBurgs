@@ -47,6 +47,7 @@ export class AddHabsburgComponent implements OnInit {
       birthplace: new FormControl(''),
       description: new FormControl(''),
       gender: new FormControl('m'),
+      picture_url: new FormControl(null),
       habsburg_ancestor: new FormControl(null)
     });
 
@@ -84,7 +85,7 @@ export class AddHabsburgComponent implements OnInit {
       this.personService.createPerson(this.habsburgFormGroup.value)
         .subscribe((person) => {
           alert('created successfully!');
-          this.router.navigate(['/person-form/' + person.pk]);
+          this.router.navigate(['/details/' + person.pk]);
         });
     }
   }

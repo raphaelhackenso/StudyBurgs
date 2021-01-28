@@ -1,14 +1,16 @@
 <form [formGroup]="habsburgFormGroup" (ngSubmit)="createOrUpdateHabsburg()" class="add-habsburg-form__form">
 
   <mat-form-field>
-    <input matInput type="text" placeholder="First Name" formControlName="first_name">
+    <input matInput type="text" placeholder="First Name" formControlName="first_name" [required]="true">
     <mat-hint align="end">The first name of the Habsburger</mat-hint>
     <mat-error *ngIf="habsburgFormGroup.controls.first_name.hasError('required')">Name is required</mat-error>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="text" placeholder="Ordinal Number" formControlName="ordinal_number" required pattern="^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\.$" >
+    <input matInput type="text" placeholder="Ordinal Number" formControlName="ordinal_number"
+           pattern="^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})\.$">
     <mat-hint align="end">The ordinal number of the Habsburger</mat-hint>
+    <mat-error *ngIf="habsburgFormGroup.controls.ordinal_number.hasError('pattern')">Ordinal number must only contain M C D X I V followed by a dot .</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -47,6 +49,11 @@
                   *ngFor="let ancestorOption of ancestorOptions ">{{ancestorOption.first_name}} {{ancestorOption.ordinal_number}}</mat-option>
     </mat-select>
     <mat-hint align="end">The ancestor of the Habsburger</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Picture URL" formControlName="picture_url">
+    <mat-hint align="end">Url of the picture</mat-hint>
   </mat-form-field>
 
   <br/>

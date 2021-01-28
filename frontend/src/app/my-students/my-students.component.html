@@ -1,1 +1,31 @@
-<p>my-students works!</p>
+<table id="excel-table">
+  <tr>
+    <th>Student</th>
+    <th>Progress %</th>
+    <th>Progress absolute</th>
+    <th>Total Habsburgs</th>
+    <th>Learned Habsburger</th>
+  </tr>
+  <tr *ngFor="let student of students">
+    <td>{{ student?.username }}</td>
+    <td>{{ student?.progress }}</td>
+    <td>
+      {{math?.round((student?.progress/100) * persons?.length)}}
+    </td>
+    <td>
+      {{persons?.length}}
+    </td>
+    <td>
+      <div *ngFor="let entry of studentslearned">
+        <div *ngIf="entry?.student == student?.username">
+          {{entry?.learned_habsburger}},
+        </div>
+      </div>
+    </td>
+
+  </tr>
+</table>
+
+<button mat-button class="mat-yellow" (click)="exportexcel()">
+  <span>Download Excel</span>
+</button>

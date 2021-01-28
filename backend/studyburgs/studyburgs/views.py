@@ -6,7 +6,7 @@ from . import serializers
 from . import models
 
 
-# TODO PERSMISIONS
+
 # -------------------
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = models.Person.objects.all()
@@ -84,7 +84,7 @@ class StudyBurgsUserViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         if user is not None:
-            if not user.is_superuser:
+            if not user.groups.filter(name__in=['Admins', 'Teacher']).exists():
                 return self.queryset.filter(pk=user.pk)
             else:
                 return self.queryset

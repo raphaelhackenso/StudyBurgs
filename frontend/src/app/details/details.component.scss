@@ -1,20 +1,23 @@
 .habsburg-card {
   max-height: 500px;
 }
+.notes-card {
+  margin-top: 20px;
+  margin-right: 10px;
+}
 
 p {
-
   overflow: auto;
   text-overflow: clip;
 }
-
 table.foobar {
   border-spacing: 15px;
 }
-
 .habsburg-icon {
   background-image: url('../../../src/assets/icon.png');
   background-size: cover;
 }
-
-
+.notes-icon {
+  background-image: url('../../../src/assets/notes.png');
+  background-size: 100% 100%;
+}

@@ -35,6 +35,7 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 import { AddNotesComponent } from './add-notes/add-notes.component';
 import { MyStudentsComponent } from './my-students/my-students.component';
 import * as XLSX from 'xlsx';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import * as XLSX from 'xlsx';
     DetailsUserComponent,
     AddNotesComponent,
     MyStudentsComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

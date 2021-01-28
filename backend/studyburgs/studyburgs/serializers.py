@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from . import models
 import re
+from django.contrib.auth.models import Group
 
 
 # PersonSerializer
@@ -52,7 +53,24 @@ class LearnedSerializer(serializers.ModelSerializer):
 class StudyburgsUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.StudyburgsUser
-        fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined', 'groupsReference']
+        fields = ['pk', 'username', 'progress', 'last_name', 'first_name', 'email', 'date_joined', 'groupsReference',
+                  'password']
+
+    def create(self, validated_data):
+        studyburgsuser = super().create(validated_data)
+        studyburgsuser.set_password(validated_data['password'])
+        my_group = Group.objects.get(name=validated_data['groupsReference'])
+        studyburgsuser.groups.add(my_group)
+        studyburgsuser.save()
+        return studyburgsuser
+
+    def update(self, instance, validated_data):
+        password = validated_data.pop('password')
+        studyburgsuser = super().update(instance, validated_data)
+        if password:
+            studyburgsuser.set_password(password)
+            studyburgsuser.save()
+        return studyburgsuser
 
 
 # NotesSerializer

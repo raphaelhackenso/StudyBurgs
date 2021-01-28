@@ -12,6 +12,10 @@
     Add Habsburg
   </button>
 
+  <button mat-button [routerLink]="'/add-user/'" *ngIf="studyburgsUserService.hasNeededPermission('auth.change_permission')">
+    Add User
+  </button>
+
   <span class="spacer">
   </span>
   <app-progress *ngIf="isLoggedIn"></app-progress>

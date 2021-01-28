@@ -15,6 +15,7 @@ export interface StudyBurgsUser {
   email: string;
   date_joined: Date;
   groupsReference: string;
+  password: string;
 
 
 }
@@ -94,6 +95,18 @@ export class StudyburgsUserService {
 
   getStudyburgUsers(): Observable<StudyBurgsUser[]> {
     return this.http.get<StudyBurgsUser[]>('/api/StudyBurgUsers/');
+  }
+
+  getStudyburgUser(pk: number): Observable<StudyBurgsUser> {
+    return this.http.get<StudyBurgsUser>('/api/StudyBurgUsers/' + pk + '/');
+  }
+
+  createStudyburgUser(studyBurgsUser: StudyBurgsUser): Observable<StudyBurgsUser> {
+    return this.http.post<StudyBurgsUser>('/api/StudyBurgUsers/', studyBurgsUser);
+  }
+
+  updateUser(studyBurgsUser: StudyBurgsUser): Observable<any>{
+    return this.http.patch('/api/StudyBurgUsers/' + studyBurgsUser.pk + '/', studyBurgsUser);
   }
 
 

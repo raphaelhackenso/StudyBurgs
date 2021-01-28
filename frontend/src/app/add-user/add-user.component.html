@@ -1,0 +1,45 @@
+<form [formGroup]="userFromGroup" (ngSubmit)="createOrUpdateUser()" class="add-user-form__form">
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="username" formControlName="username">
+    <mat-hint align="end">The first name of the Habsburger</mat-hint>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="first_name" formControlName="first_name">
+    <mat-hint align="end">The first name</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="last_name" formControlName="last_name">
+    <mat-hint align="end">The last name</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="email" formControlName="email">
+    <mat-hint align="end">The email</mat-hint>
+  </mat-form-field>
+
+
+  <mat-form-field *ngIf="!userFromGroup?.controls.pk.value">
+    <mat-select placeholder="groupsReference" formControlName="groupsReference">
+      <mat-option [value]="group?.key"
+                  *ngFor="let group of groupService?.groupNames | keyvalue">{{group?.value}}</mat-option>
+    </mat-select>
+    <mat-hint align="end">The genre of the movie</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Secret" formControlName="password" type="password" [required]="true">
+  </mat-form-field>
+
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-button class="mat-yellow" [disabled]="!userFromGroup.valid">
+      <span *ngIf="!userFromGroup?.controls.pk.value">Create</span>
+      <span *ngIf="userFromGroup?.controls.pk.value">Update</span>
+    </button>
+  </mat-card-actions>
+</form>

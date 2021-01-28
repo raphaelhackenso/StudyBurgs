@@ -26,6 +26,13 @@
                 {{user?.groupsReference}}
               </td>
             </tr>
+            <tr>
+              <td>
+                <button mat-button [routerLink]="'/add-user/' + user?.pk">
+                  Edit User
+                </button>
+              </td>
+            </tr>
           </table>
         </mat-card-content>
       </td>

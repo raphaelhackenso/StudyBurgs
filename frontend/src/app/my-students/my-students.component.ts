@@ -29,6 +29,11 @@ export class MyStudentsComponent implements OnInit {
   ngOnInit(): void {
 
     this.studyburgsUserService.getStudyburgUsers()
+      .subscribe((response) =>{
+        console.log(response);
+      })
+
+    this.studyburgsUserService.getStudyburgUsers()
       .pipe(map(usersResponse => usersResponse
         .filter(user => user.groupsReference == 'student')))
       .subscribe((filteredStudents) => {

@@ -55,3 +55,10 @@ Password: Admin123!<br/>
 - Administrator:<br/>
 Username: admin<br/>
 Password: admin<br/>
+
+
+### Changes after Presentation
+- Added Previous / Next buttons to Habsburgs Detail Page (faster switching between habsburgs)
+- Improved Details User (added Material IO Tabs)
+- After habsburgs is changed his/her details page is shown
+

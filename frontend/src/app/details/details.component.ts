@@ -32,6 +32,7 @@ export class DetailsComponent implements OnInit {
   habsburg: Person;
   learnedFormGroup: FormGroup;
   learnedHabsburg: Learned;
+  habsburgers: Person[];
 
   notes: Note[];
   displayedColumns = ['content', 'creation_date_time', 'title', 'edit', 'delete'];
@@ -73,6 +74,11 @@ export class DetailsComponent implements OnInit {
 
 
     this.retrieveNotes();
+
+    this.personService.getPersons()
+      .subscribe((response) => {
+        this.habsburgers = response;
+      })
 
 
   }
@@ -118,7 +124,7 @@ export class DetailsComponent implements OnInit {
       });
   }
 
-  private retrieveNotes(): void{
+  private retrieveNotes(): void {
     this.notesService.getNotes()
       .pipe(map(notesResponse => notesResponse
         .filter(singleNote => singleNote.note_for_user == this.studyburgsUserService.getCurrentUserID())
@@ -134,6 +140,21 @@ export class DetailsComponent implements OnInit {
         this.retrieveNotes();
         alert('Note deleted successfully!');
       });
+  }
+
+
+  nextHabsburg(pk: number): void {
+    const maxHabsburg: Number = this.habsburgers.length;
+    if (pk != maxHabsburg) {
+      window.location.href = '/details/' + (pk+1);
+    }
+
+  }
+
+  previousHabsburg(pk: number): void {
+    if (pk != 1) {
+      window.location.href = '/details/' + (pk-1);
+    }
   }
 
 

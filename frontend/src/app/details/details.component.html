@@ -61,6 +61,19 @@
         <img mat-card-image src="{{habsburg?.picture_url}}" alt="Photo of Habsburg">
       </td>
     </tr>
+    <tr>
+      <td style="align-content: center">
+        <button mat-button color="yellow" *ngIf="habsburg?.pk != 1" (click)="previousHabsburg(habsburg?.pk)">
+          <span>Previous</span>
+        </button>
+        <span> &nbsp; </span>
+        <button mat-button color="yellow" *ngIf="habsburg?.pk != habsburgers?.length"
+                (click)="nextHabsburg(habsburg?.pk)">
+          <span>Next</span>
+        </button>
+      </td>
+
+    </tr>
   </table>
 </mat-card>
 
@@ -103,3 +116,8 @@
     </ng-template>
   </tr>
 </table>
+
+
+
+
+

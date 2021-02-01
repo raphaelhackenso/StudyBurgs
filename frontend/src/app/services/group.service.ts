@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GroupService {
 
-  groupNames = {Admins: 'Admins', Teacher: 'Teacher', student: 'student'};
+  groupNames = {Admin: 'Admin', Teacher: 'Teacher', Student: 'Student'};
 
   constructor() { }
 }

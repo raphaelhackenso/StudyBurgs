@@ -36,6 +36,7 @@ import { AddNotesComponent } from './add-notes/add-notes.component';
 import { MyStudentsComponent } from './my-students/my-students.component';
 import * as XLSX from 'xlsx';
 import { AddUserComponent } from './add-user/add-user.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -52,37 +53,38 @@ import { AddUserComponent } from './add-user/add-user.component';
     MyStudentsComponent,
     AddUserComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MatTableModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatCheckboxModule,
-    NgxOrgChartModule,
-    MatProgressBarModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access_token');
-        },
-        allowedDomains: ['localhost:4200']
-      }
-    }),
-    MatSortModule,
-    MatGridListModule,
-    MatSnackBarModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule,
+        MatCardModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatCheckboxModule,
+        NgxOrgChartModule,
+        MatProgressBarModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('access_token');
+                },
+                allowedDomains: ['localhost:4200']
+            }
+        }),
+        MatSortModule,
+        MatGridListModule,
+        MatSnackBarModule,
+        MatTabsModule,
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

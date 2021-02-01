@@ -35,7 +35,7 @@ export class MyStudentsComponent implements OnInit {
 
     this.studyburgsUserService.getStudyburgUsers()
       .pipe(map(usersResponse => usersResponse
-        .filter(user => user.groupsReference == 'student')))
+        .filter(user => user.groupsReference == 'Student')))
       .subscribe((filteredStudents) => {
         this.students = filteredStudents;
       });
@@ -45,7 +45,7 @@ export class MyStudentsComponent implements OnInit {
       requestPersons: this.personService.getPersons(),
       requestStudents: this.studyburgsUserService.getStudyburgUsers()
         .pipe(map(usersResponse => usersResponse
-          .filter(user => user?.groupsReference == 'student'))),
+          .filter(user => user?.groupsReference == 'Student'))),
       requestLearneds: this.learnedService.retrieveLearneds()
         .pipe(map(learnedsResponse => learnedsResponse
           .filter(learned => learned?.state == true))),

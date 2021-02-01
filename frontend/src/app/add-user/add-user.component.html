@@ -2,7 +2,7 @@
 
   <mat-form-field>
     <input matInput type="text" placeholder="username" formControlName="username">
-    <mat-hint align="end">The first name of the Habsburger</mat-hint>
+    <mat-hint align="end">The username</mat-hint>
   </mat-form-field>
 
 
@@ -17,7 +17,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput type="text" placeholder="email" formControlName="email">
+    <input matInput type="email" placeholder="email" formControlName="email" ngModel email>
     <mat-hint align="end">The email</mat-hint>
   </mat-form-field>
 

@@ -9,6 +9,7 @@ import {forkJoin} from "rxjs";
 import {Note, NotesService} from "../services/notes.service";
 import {Habsburgsnotes} from "../services/habsburgsnotes";
 import {JSDocTagName} from "@angular/compiler/src/output/output_ast";
+import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-details-user',

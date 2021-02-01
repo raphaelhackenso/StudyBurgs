@@ -70,21 +70,18 @@ export class AddHabsburgComponent implements OnInit {
   }
 
 
-  test(): void{
-    alert('test');
-  }
-
   createOrUpdateHabsburg(): void {
     const pkFromFormGroup = this.habsburgFormGroup.value.pk;
     if (pkFromFormGroup) {
       this.personService.updatePerson(this.habsburgFormGroup.value)
         .subscribe(() => {
-          alert('updated successfully!');
+          alert('Habsburg updated successfully!');
+          this.router.navigate(['/details/' + this.habsburgFormGroup.value.pk]);
         });
     } else {
       this.personService.createPerson(this.habsburgFormGroup.value)
         .subscribe((person) => {
-          alert('created successfully!');
+          alert('Habsburg created successfully!');
           this.router.navigate(['/details/' + person.pk]);
         });
     }
